@@ -1,0 +1,78 @@
+/* Você foi contratado por um supermercado para catalogar a compra de uma cliente. 
+Assim que a aplicação começa deverá ser perguntado em um prompt qual produto o cliente deseja comprar, só serão aceitas as seguintes respostas:
+
+(1)Hortifruti
+(2)Laticínios
+(3)Carnes
+(4)Peixes
+(5)Aves
+(6)Fechar pedido
+Após fazer a seleção do produto pergunte a quantidade de itens que o cliente irá comprar.
+
+Apenas se o cliente selecionar a opção 6 é que a pergunta deverá parar de ser repetida.
+
+Ao selecionar a opção 6 imprima o produto que o cliente pegou em maior quantidade. */
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Compra de um cliente no supermercado </title>
+</head>
+<body>
+    <script>
+    const produtos = {
+        1:'Hortifruti',
+        2:'Laticinios',
+        3:'Carnes',
+        4:'Peixes',
+        5:'Aves'};
+
+    let compras = {};
+
+    function escolherProduto () {
+       return prompt ("Qual produto você deseja comprar?\n" +
+        "(1) Hortifruti\n"+
+        "(2) Laticínios\n" +
+        "(3) Carnes\n" +
+        "(4) Peixes\n" +
+        "(5) Aves\n" +
+        "(6) Fechar pedido\n"
+        )
+    };
+
+    let continuar = true;
+
+    while(continuar) {
+        let resposta = escolherProduto();
+        const produtoSelecionado = parseInt(resposta);
+        if (produtoSelecionado === 6) {
+            finalizarPedido();
+            continuar = false;  
+        }
+        else if (produtos[produtoSelecionado]){
+            const produto = produtos[produtoSelecionado];
+            const quantidade = parseInt(prompt("Quantos itens de " + produto + " você deseja comprar?\n"));
+            compras[produtos[produtoSelecionado]] = quantidade;
+        } else {
+            window.alert("Opção inválida, por favor selecione uma opção válida");
+        }
+    }
+
+    function finalizarPedido(){
+        let maiorQuantidade = 0;
+        let produtoMaisComprado = '';
+
+        for (const produto in compras) {
+          if (compras[produto] > maiorQuantidade) {
+            maiorQuantidade = compras[produto];
+            produtoMaisComprado = produto;
+          }
+        }
+
+        window.alert("Pedido finalizado. O produto mais comprado foi: " + produtoMaisComprado + " (" + maiorQuantidade + " itens).");
+      }
+    </script>
+</body>
+</html>
